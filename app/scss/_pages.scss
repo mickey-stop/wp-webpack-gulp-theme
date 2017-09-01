@@ -39,3 +39,15 @@ h1 {
     width:100%;
     height:auto;
 }
+.obican-post, .aside-post, .comment-block{
+    width:70%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align:center;
+}
+.obican-post{
+    background-color: skyblue;
+}
+.aside-post{
+    background-color: lightcoral;
+}

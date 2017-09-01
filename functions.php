@@ -70,3 +70,5 @@ function webpack_gulp_widget_setup() {
 	
 }
 add_action('widgets_init','webpack_gulp_widget_setup');
+//uključivanje html5 koda za search form
+add_theme_support('html5', array('search-form'));

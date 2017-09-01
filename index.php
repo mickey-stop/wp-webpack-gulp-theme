@@ -1,5 +1,7 @@
 <?php get_header(); ?>
 <?php
+    //dodajemo search formu
+    get_search_form( );
     echo "Početna jeste: ".is_front_page();
 ?>  
     <div class="posts">

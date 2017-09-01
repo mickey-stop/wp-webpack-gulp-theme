@@ -6,7 +6,12 @@
  		<?php wp_head(); ?>
  	</head>
  	<body <?php body_class( "moja-body-klasa" );?>> 
-        <?php wp_nav_menu(array('theme_location'=>'primary')); ?>
+        <?php wp_nav_menu(array(
+        'theme_location'=>'primary',
+        'container'=>'nav',
+        'container_class'=>'navbar',
+        'menu_class'=>'menu-items-container'
+        )); ?>
 
 <!--štampam samo stavke menija unutar li taga-->  
 <div class="moj-menu">
