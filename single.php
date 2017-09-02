@@ -6,6 +6,7 @@
 			while( have_posts() ): the_post(); ?>
 				
 				<?php get_template_part( 'single-content', get_post_format() ); ?>
+                <!--Adding comment-->
                 <div class="comment-block"> 
                     <?php 
 						if( comments_open() ){ 
@@ -17,8 +18,14 @@
 				    ?>
 				</div>
 
-			<?php endwhile;
-			
-		endif;
+			<?php endwhile;?>
+			<!--Adding navigation-->
+            <div class="navigacija">
+            <?php
+                previous_post_link();
+                next_post_link();
+            ?>
+            </div>
+		<?php endif;?>
 				
-		?>
+		

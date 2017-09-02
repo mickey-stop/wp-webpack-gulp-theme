@@ -89,3 +89,13 @@ h1 {
 
 .aside-post {
   background-color: lightcoral; }
+
+.navigacija {
+  width: 100%;
+  text-align: center;
+  padding: 30px 0; }
+  .navigacija a {
+    padding: 0 20px; }
+
+.pagination li.active a {
+  color: red; }
