@@ -8,7 +8,7 @@
 			
 			while( have_posts() ): the_post(); ?>
 				
-				<?php get_template_part( 'single-content', get_post_format() ); ?>
+				<?php get_template_part( 'content', 'flower' ); ?>
                 <!--Adding comment-->
                 <div class="comment-block"> 
                     <?php 

@@ -1,8 +1,11 @@
 <?php
 //uključivanje stilova i skripti
 function webpack_gulp_theme_script_enqueue() {
-	
+
+	wp_enqueue_style( 'bootstrap-css', 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', false, NULL, 'all' );
 	wp_enqueue_style('customstyle', get_template_directory_uri() . '/app/css/main.css', array(), '1.0.0', 'all');
+	wp_enqueue_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js', false, '1.11.3');
+	wp_enqueue_script( 'bootstrap-js', 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array('jquery'), NULL, true );
 	//wp_enqueue_script('customjs', get_template_directory_uri() . '/js/awesome.js', array(), '1.0.0', true);
 	
 }
@@ -152,7 +155,112 @@ function change_posts_number_home_page( $query ) {
 
     return $query;
     }
+	if(is_archive()){
+		$query->set('posts_per_page',3);
+	}
+	if(is_category()){
+		$query->set('posts_per_page',1);
+	}
 	if(is_category( 'voce' )){
 		$query->set('posts_per_page',4);
 	}
+	
 }
+//include walker file 
+require get_template_directory() . '/inc/walker.php';
+
+/*
+	==========================================
+	 Custom Post Type
+	==========================================
+*/
+//pravimo post type FLOWER
+function flowers_post_type (){
+	
+	$labels = array(
+		'name' => 'Flower',
+		'singular_name' => 'Flower',
+		'add_new' => 'Add new Flower',
+		'all_items' => 'All Flowers',
+		'add_new_item' => 'Add Flower',
+		'edit_item' => 'Edit Flower',
+		'new_item' => 'New Flower',
+		'view_item' => 'View Flower',
+		'search_item' => 'Search Flowers',
+		'not_found' => 'No flowers found',
+		'not_found_in_trash' => 'No items found in trash',
+		'parent_item_colon' => 'Parent Item'
+	);
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'has_archive' => true,
+		'publicly_queryable' => true,
+		'query_var' => true,
+		'rewrite' => true,
+		'capability_type' => 'post',
+		'hierarchical' => false,
+		'supports' => array(
+			'title',
+			'editor',
+			'excerpt',
+			'thumbnail',
+			'revisions',
+		),
+		'taxonomies' => array('namena'/*, 'post_tag'*/),
+		'menu_position' => 5,
+		'exclude_from_search' => false
+	);
+	register_post_type('flower',$args);
+}
+add_action('init','flowers_post_type');
+
+/*Add flowers taxonomy*/
+//Kreiramo taxonomiju NAMENA (category) i BOJA (tags)
+function flowers_custom_taxonomies() {
+	
+	//add new taxonomy hierarchical
+	$labels = array(
+		'name' => 'Namena',
+		'singular_name' => 'Namena',
+		'search_items' => 'Search Namenu',
+		'all_items' => 'All Namene',
+		'parent_item' => 'Parent namena',
+		'parent_item_colon' => 'Parent namena:',
+		'edit_item' => 'Edit namenu',
+		'update_item' => 'Update namenu',
+		'add_new_item' => 'Add New namenu',
+		'new_item_name' => 'New Namena Name',
+		'menu_name' => 'Namena'
+	);
+	
+	$args = array(
+		'hierarchical' => true,
+		'labels' => $labels,
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => array( 'slug' => 'namena' )
+	);
+	
+	register_taxonomy('namena', array('flower'), $args);
+	
+	//add new taxonomy NOT hierarchical
+	
+	register_taxonomy('boja', 'flower', array(
+		'label' => 'boja',
+		'rewrite' => array( 'slug' => 'boja' ),
+		'hierarchical' => false
+	) );
+	
+}
+add_action( 'init' , 'flowers_custom_taxonomies' );
+
+//funkcija za štampanje template fajla u futeru
+function show_template() {
+    if( is_super_admin() ){
+        global $template;
+        print_r($template);
+    } 
+}
+add_action('wp_footer', 'show_template');

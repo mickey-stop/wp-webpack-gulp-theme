@@ -99,3 +99,9 @@ h1 {
 
 .pagination li.active a {
   color: red; }
+
+.flower {
+  background-image: url(../img/cvece.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative; }
