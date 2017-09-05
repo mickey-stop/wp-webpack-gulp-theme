@@ -50,3 +50,5 @@
 		</div><!-- /.container-fluid -->
 </nav>
 </div>
+<p>	 <a href="<?php echo get_template_directory_uri().'/forma.php'?>">FORMA</a>
+</p>

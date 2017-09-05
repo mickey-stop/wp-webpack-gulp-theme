@@ -150,18 +150,19 @@ function moja_numeric_posts_nav($my_query) {
 add_action( 'pre_get_posts',  'change_posts_number_home_page'  );
 function change_posts_number_home_page( $query ) {
 
-   if ($query->is_home() && $query->is_main_query() ) {
+   if ($query->is_home() && $query->is_main_query() && !is_admin() ) {
         $query->set( 'posts_per_page', 6 );
 
     return $query;
     }
-	if(is_archive()){
+	if(is_archive() && !is_admin()){
 		$query->set('posts_per_page',3);
 	}
-	if(is_category()){
+	return $query;
+	if(is_category('povrce') && !is_admin()){
 		$query->set('posts_per_page',1);
 	}
-	if(is_category( 'voce' )){
+	if(is_category( 'voce' ) && !is_admin()){
 		$query->set('posts_per_page',4);
 	}
 	
@@ -206,6 +207,7 @@ function flowers_post_type (){
 			'excerpt',
 			'thumbnail',
 			'revisions',
+			'custom-fields'
 		),
 		'taxonomies' => array('namena'/*, 'post_tag'*/),
 		'menu_position' => 5,
