@@ -41,6 +41,7 @@
   <?php endwhile; wp_reset_postdata();?>
   <?php endif; ?>
 </div>  
+
 <?php get_sidebar();?>
 <?php get_sidebar('second');?>
 <?php get_footer(); ?>

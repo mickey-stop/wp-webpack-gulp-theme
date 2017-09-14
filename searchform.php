@@ -20,5 +20,5 @@
 		<option value="ukrasno">Ukrasno</option>
 		<option value="plodonosno">Plodonosno</option>
 	</select>
-				<input type="submit" class="search-submit" value="Search">
-			</form>
+	<input type="submit" class="search-submit" value="Search">
+</form>
