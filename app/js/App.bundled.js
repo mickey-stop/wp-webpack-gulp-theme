@@ -74,11 +74,25 @@ var _ChangeOnScroll = __webpack_require__(1);
 
 var _ChangeOnScroll2 = _interopRequireDefault(_ChangeOnScroll);
 
+var _VezbaUKonzoli = __webpack_require__(2);
+
+var _VezbaUKonzoli2 = _interopRequireDefault(_VezbaUKonzoli);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //da je u istom folderu kao i app.js bio bi from './ChangeOnScroll'
-
 var scrolled = new _ChangeOnScroll2.default();
+
+console.log(_VezbaUKonzoli2.default.prviPar);
+console.log(_VezbaUKonzoli2.default.drugiPar);
+
+var auto = new _VezbaUKonzoli.Auto("putnicko");
+auto.izracunajBrojTockova();
+console.log(auto);
+
+var bicikl = new _VezbaUKonzoli.Auto("bicikl");
+bicikl.izracunajBrojTockova();
+console.log(bicikl);
 
 /***/ }),
 /* 1 */
@@ -103,6 +117,58 @@ var ChangeOnScroll = function ChangeOnScroll() {
 };
 
 exports.default = ChangeOnScroll;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var MojObjekat = function () {
+    var prvi = 'Prvo svojstvo';
+    var drugi = "Drugo svojstvo";
+    return {
+        prviPar: prvi,
+        drugiPar: drugi
+    };
+}();
+
+var Auto = function () {
+    function Auto(vrsta) {
+        var brojTockova = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4;
+
+        _classCallCheck(this, Auto);
+
+        this.vrsta = vrsta;
+        this.brojTockova = brojTockova;
+    }
+
+    _createClass(Auto, [{
+        key: "izracunajBrojTockova",
+        value: function izracunajBrojTockova() {
+            if (this.vrsta != "putnicko") {
+                this.brojTockova = 2;
+                console.log("Bicikl ima " + this.brojTockova + " tocka");
+            } else {
+                console.log("Automobil ima " + this.brojTockova + " tocka");
+            }
+        }
+    }]);
+
+    return Auto;
+}();
+
+exports.default = MojObjekat;
+exports.Auto = Auto;
 
 /***/ })
 /******/ ]);

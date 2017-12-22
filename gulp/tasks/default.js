@@ -41,14 +41,22 @@ gulp.task('scripts',function(callback){
         callback();
     });
 });
-gulp.task('scriptsRefresh', ['scripts'], function(){
+gulp.task('scriptsRefresh', function(){
     browserSync.reload();
 });
+/*prvobitno prethodni zadatak je bio ovako definisan
+gulp.task('scriptsRefresh', ['scripts'], function(){
+  browserSync.reload();
+});*/
+
 // Watchers
 gulp.task('watch', function() {
   gulp.watch('app/scss/**/*.scss', ['sass']);
   gulp.watch('**/*.php', browserSync.reload);
-  gulp.watch('app/js/modules/*.js', ['scriptsRefresh']);
+  gulp.watch('app/js/App.bundled.js', ['scriptsRefresh']);// bilo gulp.watch('app/js/modules/*.js', ['scriptsRefresh']);
+  /*moji dodati redovi za nadgedanje samo pojedinih fajlova*/
+  gulp.watch('app/js/modules/*.js',['scripts']);
+  gulp.watch('app/js/app.js',['scripts']);
 })
 //Default task
 gulp.task('default', function(callback) {
